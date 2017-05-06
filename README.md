@@ -1,21 +1,18 @@
-knownet-widget
+Bidirectional jupyter widget example
 ===============================
 
-Jupyter widget for discovery and provenance with the knowledge network
+A widget for accessing and displaying results from the knowledge network. Demonstrates bidirectional changes between the model and the view.
 
 Installation
 ------------
 
-To install use pip:
+For a development installation inside a jupyter datascience docker container 
 
-    $ pip install knownet_widget
-    $ jupyter nbextension enable --py --sys-prefix knownet_widget
-
-
-For a development installation (requires npm),
-
-    $ git clone https://github.com/oznome/knownet-widget.git
-    $ cd knownet-widget
+    $ git clone https://github.com/oznome/knownet_widget.git
+    $ cd knownet_widget
+    $ cd js
+    $ /opt/conda/bin/npm install --unsafe-perm --verbose . 
+    $ cd ..
     $ pip install -e .
     $ jupyter nbextension install --py --symlink --sys-prefix knownet_widget
     $ jupyter nbextension enable --py --sys-prefix knownet_widget

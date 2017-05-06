@@ -30,19 +30,40 @@ var HelloModel = widgets.DOMWidgetModel.extend({
 });
 
 
-// Custom View. Renders the widget model.
+
 var HelloView = widgets.DOMWidgetView.extend({
-    render: function() {
-        this.value_changed();
-        this.model.on('change:value', this.value_changed, this);
-    },
+render: function() {
+	this.text_input = document.createElement('input');
+	this.text_input.setAttribute('type', 'text');
+	this.el.appendChild(this.text_input);
+	this.model.on('change:value', this.value_changed, this)
+	this.value_changed();
+},
+events: {
+	"change": "handle_text_change"
+},
 
-    value_changed: function() {
-        this.el.textContent = this.model.get('value');
-    }
+value_changed: function()
+{            
+	console.debug("Value in model changed")
+	this.el.innerHTML = '';
+	this.text_input = document.createElement('input');
+	this.text_input.setAttribute('type', 'text');
+	this.text_input.setAttribute('value', this.model.get('value'));
+	this.el.appendChild(this.text_input);
+	return HelloView.__super__.update.apply(this);
+},
+
+
+// Callback for when the date is changed.
+handle_text_change: function(event) {
+	this.model.set('value', event.target.value);
+	this.touch();
+},
+
 });
-
-
+    
+    
 module.exports = {
     HelloModel : HelloModel,
     HelloView : HelloView
